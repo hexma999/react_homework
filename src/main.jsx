@@ -25,7 +25,7 @@ function MemoProvider({ children }) {
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/new", element: <MemoEditPage /> }, // 신규 입력 페이지
-  { path: "/:id", element: <MemoEditPage /> }, //// 수정 페이지
+  { path: "/:id", element: <MemoEditPage /> }, // 수정 페이지
 ]);
 
 createRoot(document.getElementById("root")).render(
