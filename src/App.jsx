@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import "./App.css";
 import { MemoContext } from "./main.jsx"; // main.jsx에서 바로 가져오기
 
 function App() {

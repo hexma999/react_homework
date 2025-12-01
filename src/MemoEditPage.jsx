@@ -1,9 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { MemoContext } from "./main.jsx";
+import "./MemoEditPage.css"; // CSS 불러오기
 
 function MemoEditPage() {
-  const { id } = useParams(); // /new일 때는 undefined
+  const { id } = useParams();
   const navigate = useNavigate();
   const { memoList, setMemoList } = useContext(MemoContext);
 
@@ -13,16 +14,13 @@ function MemoEditPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (id) {
-      // 수정 모드
       const updatedList = memoList.map((m) =>
         m.id === Number(id) ? { ...m, title, content } : m
       );
       setMemoList(updatedList);
       alert("메모가 수정되었습니다!");
     } else {
-      // 신규 입력 모드
       const newMemo = {
         id: memoList.length > 0 ? memoList[memoList.length - 1].id + 1 : 1,
         title,
@@ -31,7 +29,6 @@ function MemoEditPage() {
       setMemoList([...memoList, newMemo]);
       alert("새 메모가 추가되었습니다!");
     }
-
     navigate("/");
   };
 
@@ -43,11 +40,11 @@ function MemoEditPage() {
   };
 
   return (
-    <div>
+    <div className="memo-edit">
       <h2>{id ? "메모 수정 페이지" : "새 메모 입력 페이지"}</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>제목: </label>
+          <label>제목</label>
           <input
             type="text"
             value={title}
@@ -56,7 +53,7 @@ function MemoEditPage() {
         </div>
 
         <div>
-          <label>내용: </label>
+          <label>내용</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -65,13 +62,8 @@ function MemoEditPage() {
 
         <button type="submit">{id ? "수정하기" : "추가하기"}</button>
 
-        {/* 삭제 버튼은 수정 모드일 때만 보이게 */}
         {id && (
-          <button
-            type="button"
-            onClick={handleDelete}
-            style={{ marginLeft: "10px", color: "red" }}
-          >
+          <button type="button" onClick={handleDelete} className="delete">
             삭제하기
           </button>
         )}
