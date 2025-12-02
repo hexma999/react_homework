@@ -22,11 +22,16 @@ function MemoProvider({ children }) {
   );
 }
 
-const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/new", element: <MemoEditPage /> }, // 신규 입력 페이지
-  { path: "/:id", element: <MemoEditPage /> }, // 수정 페이지
-]);
+const router = createBrowserRouter(
+  [
+    { path: "/", element: <App /> },
+    { path: "/new", element: <MemoEditPage /> }, // 신규 입력 페이지
+    { path: "/:id", element: <MemoEditPage /> }, // 수정 페이지
+  ],
+  {
+    basename: "/react_homework", // GitHub Pages 서브 경로 지정
+  }
+);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
